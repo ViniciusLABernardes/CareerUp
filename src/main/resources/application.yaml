@@ -1,0 +1,27 @@
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+  port: 8080
+
+spring:
+  ai:
+    openai:
+      api-key: suaapikey
+  application:
+    name: CareerUp
+  datasource:
+    password: ${DBPASSWORD}
+    url: ${DBURL:jdbc:oracle:thin:@//oracle.fiap.com.br:1521/ORCL}
+    username: ${DBUSER}
+    driver-class-name: ${DBDRIVER:oracle.jdbc.driver.OracleDriver}
+  jpa:
+
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: ${DBDIALECT:org.hibernate.dialect.OracleDialect}
+        format_sql: true
+    show-sql: true

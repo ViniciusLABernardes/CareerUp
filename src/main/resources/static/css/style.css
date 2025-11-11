@@ -1,0 +1,250 @@
+
+:root {
+    --bg: #fefefd;           /* fundo */
+    --card: #2f2f2e;         /* cinza-escuro */
+    --muted: #9aa0a6;        /* mantive o cinza claro para textos secundários */
+    --line: #2f2f2e;         /* linhas e bordas */
+    --primary: #24A8F0;
+    --danger: #b91c1c;       /* mantive vermelho para perigo */
+    --secondary: #F9AF36;
+    --purple: #96578A;
+
+}
+
+* {
+    box-sizing: border-box;
+
+}
+
+body {
+
+    font-family: system-ui, Arial, sans-serif;
+    background: var(--bg);
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+footer {
+    display: flex;
+    padding-top: 25vh;
+    justify-content: center;
+    align-items: end;
+    text-align: center;
+
+}
+.searchbar {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-outline,
+.btn-danger {
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+}
+.btn-secondary {
+    background: var(--secondary);
+    color: #fff;
+}
+.btn-outline {
+    background-color: var(--muted);
+    color: #fff;
+    min-width: 4.2em;
+    width: 6vw;
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    color: #fff;
+    text-align: center;
+    min-width: 5em;
+    width: 6vw;
+
+}
+
+.card {
+    margin-right: 3em;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    color: #fff;
+}
+.login-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    background-color: #fefefd;
+}
+
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: #2f2f2e;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 300px;
+}
+.header-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5em;
+    padding-bottom: 5em;
+}
+
+.header-container img {
+    width: 15em;
+    height: auto;
+}
+
+ h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #319f7b;
+}
+
+.login-input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.funcBody{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login-button {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #67b819;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #4B9E32;
+}
+.table {
+    width: 60vw;
+    height: 50vh;
+    border-collapse: collapse;
+    background-color: var(--alt-green);
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border:none;
+}
+
+.table th,
+.table td {
+
+
+    justify-content: start;
+    padding: 10px 12px;
+    color: #fff;
+    text-align: center;
+}
+
+.table th {
+
+    background-color: var(--primary);
+    color: #fff;
+}
+
+.table .num {
+    text-align: right;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    color: #fff;
+    padding: 8px;
+    gap: 15px;
+
+}
+td.actions-cell {
+    width: 150px;
+
+}
+
+td.actions-cell .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+.muted {
+    color: var(--muted);
+}
+
+.form .field {
+    margin-bottom: 12px;
+}
+
+.form .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.form input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: #eee;
+    color: #000;
+}
+.info {
+    background-color: #f9f9a9;
+    color: #333;
+    border-left: 4px solid #ffcc00;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+}
+.error {
+    color: #ff6b6b;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.footer {
+    margin-top: 16px;
+}

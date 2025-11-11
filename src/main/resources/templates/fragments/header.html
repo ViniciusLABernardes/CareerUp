@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="headerFragment">
+    <header class="header-container">
+
+        <img th:src="@{/images/CareerUp-Logo.jpg}" alt="CareerUp5 logo">
+        <a th:href="@{/index}" class="btn-primary">função principal</a>
+        <a th:href="@{/funcionario/funcionarios}" class="btn-secondary">Gerenciar usuários</a>
+
+        <a th:href="@{/logout}" class="btn-danger">Logout</a>
+
+    </header>
+</div>
+</body>
+</html>
