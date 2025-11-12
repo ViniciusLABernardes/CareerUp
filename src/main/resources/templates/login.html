@@ -8,18 +8,19 @@
 </head>
 
 <body style="display:flex;flex-direction:column;align-items: center;">
-<img th:src="@{/images/CareerUp-Logo.jpg}" alt="CareerUp logo" style="width: 250px;height: auto;display: flex;align-items: center;">
-<H1 class="">UWBike</H1>
+<img th:src="@{/images/CareerUp-Logo.png}" alt="CareerUp logo" style="height: 14em;display: flex;align-items: center;">
+<H1 class="">CareerUp</H1>
 <section class="login-section">
     <form action="/login" method="post" class="login-form">
         <input type="text" name="username" id="username" class="login-input" placeholder="Login" required />
         <input type="password" name="password" id="password" class="login-input" placeholder="Senha" required />
         <button type="submit" class="login-button">Login</button>
     </form>
+    <p>Não tem uma conta ainda? <a th:href="@{/cadastro}"><strong>Cadastre-se</strong></a></p>
     <h3>Dados mockados para teste:</h3>
     <ul>
         <li><strong>Conta Gerente:</strong> garibaldo.torres | <strong>Senha:</strong> armando123</li>
-        <li><strong>Conta Auxiliar de pátio:</strong> carlos.silva | <strong>Senha:</strong> carlos123</li>
+        <li><strong>Conta Usuário:</strong> carlos.silva | <strong>Senha:</strong> carlos123</li>
     </ul>
 </section>
 </body>

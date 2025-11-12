@@ -45,13 +45,19 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
+
                 .formLogin(form -> form
                         .loginPage("/login").permitAll()
                         .defaultSuccessUrl("/index", true)
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                        .requestMatchers("/usuario/**").hasRole("USUARIO")
+                        .requestMatchers("/cadastro").permitAll()
+                        .requestMatchers("/usuario/salvar").permitAll()
+                        .requestMatchers("/recomendacao/**").hasAnyRole("USUARIO","GERENTE")
+                        .requestMatchers("/usuario/cadastro").hasAnyRole("USUARIO","GERENTE")
+                        .requestMatchers("/usuario/listar").hasAnyRole("USUARIO","GERENTE")
+                        .requestMatchers("/usuario/alterar-cargo").hasRole("GERENTE")
                         .requestMatchers("/dashboard-gerente/**").hasRole("GERENTE")
 
                         .anyRequest().authenticated()

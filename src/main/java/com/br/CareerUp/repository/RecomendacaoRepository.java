@@ -10,5 +10,7 @@ import java.util.List;
 
 @Repository
 public interface RecomendacaoRepository extends JpaRepository<Recomendacao, Long> {
-    List<Recomendacao> findByUsuario(Long idUsuario);
+    List<Recomendacao> findByUsuario_LoginUsuario_Login(String login);
+
+
 }

@@ -18,8 +18,9 @@ public class Recomendacao {
     @Column(name = "id_recomendacao")
     private Long idRecomendacao;
 
-    @Column(name = "id_usuario", nullable = false)
-    private Long idUsuario;
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
     @Column(name = "data_geracao", nullable = false)
     private LocalDateTime dataGeracao;

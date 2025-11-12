@@ -2,28 +2,29 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Recomendações da IA</title>
+    <title>Recomendações</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 <div th:replace="fragments/header :: headerFragment"></div>
 
 <main class="funcBody">
+
+
+    <form th:action="@{'/recomendacao/' + ${usuario.idUsuario} + '/gerar'}" method="post" style="display:inline;">
+        <button type="submit" class="btn-primary">Gerar Nova Recomendação</button>
+    </form>
+
     <h1>Histórico de Recomendações</h1>
 
-    <div class="actions">
-        <a th:href="@{'/recomendacoes/' + ${usuario.idUsuario} + '/gerar'}" class="btn-primary">
-            Gerar Nova Recomendação
-        </a>
-    </div>
-
     <div class="card-container">
-        <div th:each="rec : ${recomendacoes}" class="card">
+        <div th:each="rec : ${recomendacao}" class="card">
             <h3 th:text="'Recomendação #' + ${rec.idRecomendacao}"></h3>
-            <p><strong>Gerado em:</strong> <span th:text="${#dates.format(rec.dataGeracao, 'dd/MM/yyyy HH:mm')}"></span></p>
+            <p><strong>Gerado em:</strong> <span th:text="${#temporals.format(rec.dataGeracao, 'dd/MM/yyyy HH:mm')}"></span></p>
             <p th:text="${rec.resultadoIa}"></p>
         </div>
     </div>
+
 
 </main>
 

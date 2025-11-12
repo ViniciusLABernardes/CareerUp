@@ -19,15 +19,15 @@ public class UsuarioDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepository.findByLogin_Login(login)
+        Usuario usuario = usuarioRepository.findByLoginUsuario_Login(login)
                 .orElseThrow(() -> new UsernameNotFoundException("Login não encontrado: " + login));
 
 
 
         return User.builder()
-                .username(usuario.getLogin().getLogin())
-                .password(usuario.getLogin().getSenha())
-                .roles(usuario.getCargo().toUpperCase())
+                .username(usuario.getLoginUsuario().getLogin())
+                .password(usuario.getLoginUsuario().getSenha())
+                .roles(usuario.getPapel().name())
                 .build();
 
     }

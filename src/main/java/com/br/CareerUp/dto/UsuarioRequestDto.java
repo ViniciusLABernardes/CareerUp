@@ -1,7 +1,7 @@
 package com.br.CareerUp.dto;
 
-import com.br.CareerUp.model.Habilidade;
-import com.br.CareerUp.model.Login;
+import com.br.CareerUp.model.PapelUsuario;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,9 +22,11 @@ public class UsuarioRequestDto {
     private String cpf;
     @NotBlank
     private String cargo;
-    @NotBlank
-    private LoginRequestDto login;
-    @NotBlank
+
+    private PapelUsuario papel;
+    @Valid
+    private LoginRequestDto loginUsuario;
+    @Valid
     private HabilidadeRequestDto habilidades;
 
 

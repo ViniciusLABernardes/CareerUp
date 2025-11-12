@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Recomendação</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div th:replace="fragments/header :: headerFragment"></div>
+
+<main class="funcBody">
+
+    <div th:if="${mensagemSucesso}" class="alert success">
+        <p th:text="${mensagemSucesso}"></p>
+    </div>
+    <div th:if="${erro}" class="alert error">
+        <p th:text="${erro}"></p>
+    </div>
+
+    <h1>Detalhes da Recomendação</h1>
+
+    <div class="card">
+        <div class="field">
+            <label>Usuário:</label>
+            <span th:text="${recomendacao.usuario.nomeUsuario}"></span>
+        </div>
+
+        <div class="field">
+            <label>CPF:</label>
+            <span th:text="${recomendacao.usuario.cpf}"></span>
+        </div>
+
+        <div class="field">
+            <label>Cargo:</label>
+            <span th:text="${recomendacao.usuario.cargo}"></span>
+        </div>
+
+        <div class="field">
+            <label>Resultado da IA:</label>
+            <p th:text="${recomendacao.resultadoIa}"></p>
+        </div>
+
+        <div class="field">
+            <label>Data de Geração:</label>
+            <span th:text="${#temporals.format(recomendacao.dataGeracao, 'dd/MM/yyyy HH:mm')}"></span>
+        </div>
+
+        <div class="actions">
+            <a th:href="@{/recomendacao/listar}" class="btn-primary">Voltar</a>
+        </div>
+    </div>
+</main>
+
+<div th:replace="fragments/footer :: footerFragment"></div>
+
+</body>
+</html>

@@ -27,11 +27,15 @@ public class Usuario {
     @Column(name = "cargo",nullable = false)
     private String cargo;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PapelUsuario papel;
+
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private Habilidade habilidade;
+    private Habilidade habilidades;
+
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private LoginUsuario loginUsuario;
 
 
-    public Login getLogin() {
-        return getLogin();
-    }
 }

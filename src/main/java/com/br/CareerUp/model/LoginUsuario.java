@@ -6,12 +6,12 @@ import lombok.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "TB_LOGIN")
+@Table(name = "TB_LOGIN_USUARIO")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Login implements Serializable {
+public class LoginUsuario implements Serializable {
 
     @Id
     @Column(name = "id_usuario")

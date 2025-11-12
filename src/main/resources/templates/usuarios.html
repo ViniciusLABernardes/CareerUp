@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Usuários</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div th:replace="fragments/header :: headerFragment"></div>
+
+<main class="funcBody">
+    <h1>Usuários</h1>
+
+    <div style="margin-bottom: 20px; margin-top: 20px">
+        <a th:href="@{/usuario/cadastrar}" class="btn-secondary">+ Novo Usuário</a>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Cargo</th>
+            <th>Papel</th>
+            <th>Login</th>
+            <th>Habilidade Primária</th>
+            <th>Habilidade Secundária</th>
+            <th>Habilidade Terciária</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.idUsuario}"></td>
+            <td th:text="${usuario.nomeUsuario}"></td>
+            <td th:text="${usuario.cpf}"></td>
+            <td th:text="${usuario.cargo}"></td>
+            <td th:text="${usuario.papel}"></td>
+            <td th:text="${usuario.login.login}"></td>
+            <td th:text="${usuario.habilidade.habilidadePrimaria}"></td>
+            <td th:text="${usuario.habilidade.habilidadeSecundaria}"></td>
+            <td th:text="${usuario.habilidade.habilidadeTerciaria}"></td>
+
+            <td class="actions-cell">
+                <div class="actions">
+                    <a th:href="@{'/usuario/' + ${usuario.idUsuario} + '/editar'}" class="btn-outline">Editar</a>
+                    <a th:href="@{'/usuario/' + ${usuario.idUsuario} + '/remover'}" class="btn-danger"
+                       onclick="return confirm('Deseja realmente remover este usuário?');">Excluir</a>
+                </div>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(usuarios)}">
+            <td colspan="10">Nenhum usuário cadastrado.</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<div th:replace="fragments/footer :: footerFragment"></div>
+</body>
+</html>
