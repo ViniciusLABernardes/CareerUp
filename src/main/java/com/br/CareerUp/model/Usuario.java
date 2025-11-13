@@ -3,6 +3,8 @@ package com.br.CareerUp.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="tb_usuario")
 @Getter
@@ -24,6 +26,9 @@ public class Usuario {
     @Column(name="cpf",nullable = false,length = 30, unique = true)
     private String cpf;
 
+    @Column(name="email", nullable = false,length = 100,unique = true)
+    private String email;
+
     @Column(name = "cargo",nullable = false)
     private String cargo;
 
@@ -31,11 +36,12 @@ public class Usuario {
     @Column(nullable = false)
     private PapelUsuario papel;
 
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Habilidade habilidades;
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private LoginUsuario loginUsuario;
 
-
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Recomendacao> recomendacoes;
 }

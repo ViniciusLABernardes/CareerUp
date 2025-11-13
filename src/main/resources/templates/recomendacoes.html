@@ -22,12 +22,37 @@
             <h3 th:text="'Recomendação #' + ${rec.idRecomendacao}"></h3>
             <p><strong>Gerado em:</strong> <span th:text="${#temporals.format(rec.dataGeracao, 'dd/MM/yyyy HH:mm')}"></span></p>
             <p th:text="${rec.resultadoIa}"></p>
+            <div class="actions">
+                <form th:action="@{'/recomendacao/' + ${rec.idRecomendacao} + '/excluir'}"  method="post"
+                      onsubmit="return confirm('Confirmar exclusão?');" style="display:inline;">
+                    <button type="submit" class="btn-danger">Excluir</button>
+                </form>
+
+            </div>
         </div>
     </div>
-
+    <div class="modal fade" id="sucessoModal" tabindex="-1" aria-hidden="true"
+         th:classappend="${mensagemSucesso} ? 'show' : ''"
+         th:style="${mensagemSucesso} ? 'display: block;' : 'display: none;'">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">Sucesso</h5>
+                </div>
+                <div class="modal-body">
+                    <p th:text="${mensagemSucesso}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main>
 
 <div th:replace="fragments/footer :: footerFragment"></div>
+
+<script th:if="${mensagemSucesso}">
+    const modal = new bootstrap.Modal(document.getElementById('sucessoModal'));
+    modal.show();
+</script>
 </body>
 </html>

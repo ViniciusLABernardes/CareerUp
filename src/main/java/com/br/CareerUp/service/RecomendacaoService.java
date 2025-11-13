@@ -1,5 +1,6 @@
 package com.br.CareerUp.service;
 
+import com.br.CareerUp.exceptions.IdNaoEncontradoException;
 import com.br.CareerUp.model.Recomendacao;
 import com.br.CareerUp.model.Usuario;
 import com.br.CareerUp.repository.RecomendacaoRepository;
@@ -43,7 +44,13 @@ public class RecomendacaoService {
         return rec;
     }
 
+
     public List<Recomendacao> listarRecomendacoes(String login) {
         return recomendacaoRepository.findByUsuario_LoginUsuario_Login(login);
+    }
+    public void deletarRecomendacao(Long idRecomendacao) throws IdNaoEncontradoException {
+        Recomendacao recomendacao = recomendacaoRepository.findById(idRecomendacao)
+                .orElseThrow(()-> new IdNaoEncontradoException("Recomendação com id: " + idRecomendacao + " não encontrada!"));
+        recomendacaoRepository.delete(recomendacao);
     }
 }

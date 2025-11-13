@@ -1,6 +1,7 @@
 package com.br.CareerUp.controller;
 
 
+import com.br.CareerUp.dto.HabilidadeRequestDto;
 import com.br.CareerUp.dto.UsuarioRequestDto;
 import com.br.CareerUp.exceptions.IdNaoEncontradoException;
 import com.br.CareerUp.model.Usuario;
@@ -31,6 +32,16 @@ public class UsuarioController {
 
     }
 
+    @PostMapping("{idUsuario}/excluir")
+    public String deletarUsuario(@PathVariable Long idUsuario, Model model){
+        try {
+            usuarioService.deletarUsuario(idUsuario);
+        } catch (IdNaoEncontradoException e) {
+            model.addAttribute("erro", e.getMessage());
+        }
+        return "redirect:/usuario/listar";
+    }
+
 
     @GetMapping("/cadastro")
     public String exibirFormularioCadastro(Model model) {
@@ -45,14 +56,29 @@ public class UsuarioController {
         return "redirect:/login";
     }
 
-    @PatchMapping("/alterar-cargo")
-    public String alterarCargo(@RequestParam("novoCargo") String novoCargo,
-                               Authentication authentication) throws IdNaoEncontradoException {
+    @PostMapping("{idUsuario}/alterar-cargo")
+    public String alterarCargo(@PathVariable Long idUsuario,
+                               String novoCargo) throws IdNaoEncontradoException {
 
-        String login = authentication.getName();
-        usuarioService.editarCargoUsuarioPorLogin(login, novoCargo);
+        usuarioService.editarCargoUsuarioPorLogin(idUsuario, novoCargo);
 
-        return "redirect:/usuario/perfil";
+        return "redirect:/usuario/listar";
     }
 
+    @GetMapping("{idUsuario}/editar")
+    public String editarUsuario(Model model,@PathVariable  Long idUsuario) throws IdNaoEncontradoException {
+        Usuario usuario = usuarioService.visualizarDadosUsuarioEspecifico(idUsuario);
+        model.addAttribute("usuario", usuario);
+        return "detalhe-usuario";
+
+    }
+
+    @PostMapping("{idUsuario}/atualizar-habilidades")
+    public String atualizarHabilidades(@PathVariable Long idUsuario, Model model, HabilidadeRequestDto dto) throws IdNaoEncontradoException{
+        usuarioService.atualizarHabilidades(idUsuario,dto);
+        Usuario usuario = usuarioService.visualizarDadosUsuarioEspecifico(idUsuario);
+        model.addAttribute("usuario",usuario);
+
+        return "redirect:/usuario/{idUsuario}/editar";
+    }
 }

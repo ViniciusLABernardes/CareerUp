@@ -11,10 +11,6 @@
 <main class="funcBody">
     <h1>Usuários</h1>
 
-    <div style="margin-bottom: 20px; margin-top: 20px">
-        <a th:href="@{/usuario/cadastrar}" class="btn-secondary">+ Novo Usuário</a>
-    </div>
-
     <table class="table">
         <thead>
         <tr>
@@ -31,23 +27,23 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="usuario : ${usuarios}">
+        <tr th:each="usuario : ${usuario}">
             <td th:text="${usuario.idUsuario}"></td>
             <td th:text="${usuario.nomeUsuario}"></td>
             <td th:text="${usuario.cpf}"></td>
             <td th:text="${usuario.cargo}"></td>
             <td th:text="${usuario.papel}"></td>
-            <td th:text="${usuario.login.login}"></td>
-            <td th:text="${usuario.habilidade.habilidadePrimaria}"></td>
-            <td th:text="${usuario.habilidade.habilidadeSecundaria}"></td>
-            <td th:text="${usuario.habilidade.habilidadeTerciaria}"></td>
+            <td th:text="${usuario.loginUsuario.login}"></td>
+            <td th:text="${usuario.habilidades.habilidadePrimaria}"></td>
+            <td th:text="${usuario.habilidades.habilidadeSecundaria}"></td>
+            <td th:text="${usuario.habilidades.habilidadeTerciaria}"></td>
 
             <td class="actions-cell">
-                <div class="actions">
                     <a th:href="@{'/usuario/' + ${usuario.idUsuario} + '/editar'}" class="btn-outline">Editar</a>
-                    <a th:href="@{'/usuario/' + ${usuario.idUsuario} + '/remover'}" class="btn-danger"
-                       onclick="return confirm('Deseja realmente remover este usuário?');">Excluir</a>
-                </div>
+                    <form th:action="@{'/usuario/' + ${usuario.idUsuario} + '/excluir'}" method="post"
+                          onsubmit="return confirm('Confirmar exclusão?');" style="display:inline;">
+                        <button type="submit" class="btn-danger">Excluir</button>
+                    </form>
             </td>
         </tr>
         <tr th:if="${#lists.isEmpty(usuarios)}">

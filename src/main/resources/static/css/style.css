@@ -117,6 +117,25 @@ footer {
     width: 350px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
+.pagination {
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.pagination a {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.pagination a:hover {
+    background-color: #45a049;
+}
 .login-form {
     display: flex;
     flex-direction: column;

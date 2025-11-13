@@ -21,6 +21,8 @@ public class UsuarioRequestDto {
     @NotBlank
     private String cpf;
     @NotBlank
+    private String email;
+    @NotBlank
     private String cargo;
 
     private PapelUsuario papel;

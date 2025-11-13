@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedbacks</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: headerFragment"></div>
+
+<main class="funcBody">
+    <h1>📬 Feedbacks Recebidos</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>De</th>
+            <th>Para</th>
+            <th>Assunto</th>
+            <th>Data</th>
+            <th>Status</th>
+            <th>Mensagem</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="email : ${emailsPage.content}">
+            <td th:text="${email.emailFrom}"></td>
+            <td th:text="${email.emailTo}"></td>
+            <td th:text="${email.subject}"></td>
+            <td th:text="${#temporals.format(email.sendDateEmail, 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="${email.statusEmail}"></td>
+            <td th:text="${email.text}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <a th:if="${currentPage > 0}"
+           th:href="@{/feedbacks(page=${currentPage - 1}, size=5)}">⬅ Anterior</a>
+
+        <span>Página <span th:text="${currentPage + 1}"></span> de <span th:text="${totalPages}"></span></span>
+
+        <a th:if="${currentPage + 1 < totalPages}"
+           th:href="@{/feedbacks(page=${currentPage + 1}, size=5)}">Próxima ➡</a>
+    </div>
+</main>
+
+<div th:replace="fragments/footer :: footerFragment"></div>
+
+</body>
+</html>

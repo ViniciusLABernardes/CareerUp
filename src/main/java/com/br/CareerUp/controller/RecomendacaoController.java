@@ -1,10 +1,12 @@
 package com.br.CareerUp.controller;
 
+import com.br.CareerUp.exceptions.IdNaoEncontradoException;
 import com.br.CareerUp.model.Recomendacao;
 import com.br.CareerUp.model.Usuario;
 import com.br.CareerUp.service.RecomendacaoService;
 import com.br.CareerUp.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,5 +52,15 @@ public class RecomendacaoController {
         Recomendacao recomendacao = recomendacaoService.buscarPorId(id);
         model.addAttribute("recomendacao", recomendacao);
         return "detalhe-recomendacao";
+    }
+
+    @PostMapping("{idRecomendacao}/excluir")
+    public String deletarRecomendacao(@PathVariable Long idRecomendacao, Model model) {
+        try {
+            recomendacaoService.deletarRecomendacao(idRecomendacao);
+        } catch (IdNaoEncontradoException e) {
+            model.addAttribute("erro", e.getMessage());
+        }
+        return "redirect:/recomendacao/listar";
     }
 }

@@ -16,6 +16,20 @@ spring:
     url: ${DBURL:jdbc:oracle:thin:@//oracle.fiap.com.br:1521/ORCL}
     username: ${DBUSER}
     driver-class-name: ${DBDRIVER:oracle.jdbc.driver.OracleDriver}
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  rabbitmq:
+    addresses: amqps://
+    queue:
   jpa:
 
     hibernate:

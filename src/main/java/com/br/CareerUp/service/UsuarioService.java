@@ -1,5 +1,6 @@
 package com.br.CareerUp.service;
 
+import com.br.CareerUp.dto.HabilidadeRequestDto;
 import com.br.CareerUp.dto.UsuarioRequestDto;
 import com.br.CareerUp.exceptions.IdNaoEncontradoException;
 import com.br.CareerUp.model.Habilidade;
@@ -40,6 +41,7 @@ public class UsuarioService {
         Usuario user = Usuario.builder()
                 .nomeUsuario(usuarioRequestDto.getNomeUsuario())
                 .cpf(usuarioRequestDto.getCpf())
+                .email(usuarioRequestDto.getEmail())
                 .cargo(usuarioRequestDto.getCargo())
                 .papel(usuarioRequestDto.getPapel())
                 .build();
@@ -65,18 +67,40 @@ public class UsuarioService {
 
     }
 
+    @Transactional
+    public Usuario atualizarHabilidades(Long idUsuario, HabilidadeRequestDto habilidadeRequestDto) throws IdNaoEncontradoException {
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+                .orElseThrow(() -> new IdNaoEncontradoException("Usuário não encontrado com o id: " + idUsuario));
+        Habilidade habilidade = new Habilidade();
+
+        habilidade.setHabilidadePrimaria(habilidadeRequestDto.getHabilidadePrimaria());
+        habilidade.setHabilidadeSecundaria(habilidadeRequestDto.getHabilidadeSecundaria());
+        habilidade.setHabilidadeTerciaria(habilidadeRequestDto.getHabilidadeTerciaria());
+
+        usuario.setHabilidades(habilidade);
+        return usuario;
+    }
 
     @Transactional
-    public Usuario editarCargoUsuarioPorLogin(String login, String novoCargo) throws IdNaoEncontradoException {
-        Usuario usuario = usuarioRepository.findByLoginUsuario_Login(login)
-                .orElseThrow(() -> new IdNaoEncontradoException("Usuário não encontrado com o login: " + login));
+    public Usuario editarCargoUsuarioPorLogin(Long idUsuario, String novoCargo) throws IdNaoEncontradoException {
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+                .orElseThrow(() -> new IdNaoEncontradoException("Usuário não encontrado com o id: " + idUsuario));
 
         usuario.setCargo(novoCargo);
         return usuarioRepository.save(usuario);
+    }
+
+    public void deletarUsuario(Long idUsuario) throws IdNaoEncontradoException{
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+                .orElseThrow(()-> new IdNaoEncontradoException("Usuário não encontado com o id: " + idUsuario));
+        usuarioRepository.delete(usuario);
     }
 
     public List<Usuario> listarUsuarios(){
         return usuarioRepository.findAll();
     }
 
+    public Usuario visualizarDadosUsuarioEspecifico(Long idUsuario) throws IdNaoEncontradoException{
+        return usuarioRepository.findById(idUsuario).orElseThrow(()-> new IdNaoEncontradoException("Usuário não encontrado!"));
+    }
 }

@@ -48,7 +48,7 @@ public class SecurityConfig {
 
                 .formLogin(form -> form
                         .loginPage("/login").permitAll()
-                        .defaultSuccessUrl("/index", true)
+                        .defaultSuccessUrl("/recomendacao/listar", true)
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
@@ -56,7 +56,7 @@ public class SecurityConfig {
                         .requestMatchers("/usuario/salvar").permitAll()
                         .requestMatchers("/recomendacao/**").hasAnyRole("USUARIO","GERENTE")
                         .requestMatchers("/usuario/cadastro").hasAnyRole("USUARIO","GERENTE")
-                        .requestMatchers("/usuario/listar").hasAnyRole("USUARIO","GERENTE")
+                        .requestMatchers("/usuario/listar").hasRole("GERENTE")
                         .requestMatchers("/usuario/alterar-cargo").hasRole("GERENTE")
                         .requestMatchers("/dashboard-gerente/**").hasRole("GERENTE")
 
