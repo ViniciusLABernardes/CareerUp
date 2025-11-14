@@ -7,6 +7,8 @@ import com.br.CareerUp.repository.RecomendacaoRepository;
 import com.br.CareerUp.repository.UsuarioRepository;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,7 @@ public class RecomendacaoService {
                 .orElseThrow(() -> new RuntimeException("Recomendação não encontrada"));
     }
 
+    @Cacheable(value = "recomendacaoCache", key = "#idUsuario")
     public Recomendacao gerarRecomendacao(Long idUsuario) {
         Usuario usuario = usuarioRepository.findById(idUsuario)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
@@ -132,6 +135,10 @@ A resposta deve ser somente texto puro (sem Markdown).
         return rec;
     }
 
+    @CacheEvict(value = "recomendacaoCache", key = "#idUsuario")
+    public void invalidarCachePorUsuario(Long idUsuario) {
+
+    }
 
     public Page<Recomendacao> listarRecomendacoesPaginadas(String login, Pageable pageable) {
         return recomendacaoRepository.findByUsuario_LoginUsuario_Login(login, pageable);
