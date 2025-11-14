@@ -9,7 +9,7 @@
             <img th:src="@{/images/CareerUp-Logo.png}" alt="CareerUp5 logo">
             <a th:href="@{/recomendacao/listar}" class="btn-primary">função principal</a>
             <a th:href="@{/email/cadastrar-feedback}" class="btn-primary">Enviar um feedback</a>
-        <a th:href="@{'/usuario/' + ${usuarioLogado.idUsuario} + '/editar'}" class="btn-header">
+        <a th:href="@{'/usuario/' + ${usuarioLogado.idUsuario} + '/editar'}" class="btn-secondary">
             Alterar Habilidades
         </a>
         <div sec:authorize="hasRole('GERENTE')">
