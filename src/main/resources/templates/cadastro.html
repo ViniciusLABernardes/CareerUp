@@ -84,22 +84,10 @@
 
     </div>
     <p>Já tem uma conta ? <a th:href="@{/login}"><strong>Logar-se</strong></a></p>
-    <div th:if="${cadastroSucesso}">
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <h2>✅ Cadastro realizado com sucesso!</h2>
-                <p>Agora você já pode fazer login na plataforma.</p>
-                <button onclick="fecharModal()">Fechar</button>
-            </div>
-        </div>
-    </div>
+
 
 </main>
-<script>
-    function fecharModal() {
-        document.getElementById('modal').style.display = 'none';
-    }
-</script>
+
 <div th:replace="fragments/footer :: footerFragment"></div>
 </body>
 </html>

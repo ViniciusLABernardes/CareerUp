@@ -37,12 +37,12 @@
 
     <div class="pagination">
         <a th:if="${currentPage > 0}"
-           th:href="@{/feedbacks(page=${currentPage - 1}, size=5)}">⬅ Anterior</a>
+           th:href="@{/email/feedbacks(page=${currentPage - 1}, size=5)}">⬅ Anterior</a>
 
         <span>Página <span th:text="${currentPage + 1}"></span> de <span th:text="${totalPages}"></span></span>
 
         <a th:if="${currentPage + 1 < totalPages}"
-           th:href="@{/feedbacks(page=${currentPage + 1}, size=5)}">Próxima ➡</a>
+           th:href="@{/email/feedbacks(page=${currentPage + 1}, size=5)}">Próxima ➡</a>
     </div>
 </main>
 

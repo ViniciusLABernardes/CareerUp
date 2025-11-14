@@ -5,9 +5,13 @@ import com.br.CareerUp.dto.HabilidadeRequestDto;
 import com.br.CareerUp.dto.UsuarioRequestDto;
 import com.br.CareerUp.exceptions.IdNaoEncontradoException;
 import com.br.CareerUp.model.Usuario;
-import com.br.CareerUp.repository.UsuarioRepository;
+
 import com.br.CareerUp.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +29,19 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping("/listar")
-    public String listarUsuarios(Model model){
-        List<Usuario> usuarios = usuarioService.listarUsuarios();
-        model.addAttribute("usuario", usuarios);
-        return "usuarios";
+    public String listarUsuarios(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            Model model) {
 
+        Pageable pageable = PageRequest.of(page, size, Sort.by("nomeUsuario").ascending());
+        Page<Usuario> usuariosPage = usuarioService.listarUsuarios(pageable);
+
+        model.addAttribute("usuariosPage", usuariosPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", usuariosPage.getTotalPages());
+
+        return "usuarios";
     }
 
     @PostMapping("{idUsuario}/excluir")
@@ -69,16 +81,17 @@ public class UsuarioController {
     public String editarUsuario(Model model,@PathVariable  Long idUsuario) throws IdNaoEncontradoException {
         Usuario usuario = usuarioService.visualizarDadosUsuarioEspecifico(idUsuario);
         model.addAttribute("usuario", usuario);
-        return "detalhe-usuario";
+        return "alterar-habilidades";
 
     }
 
     @PostMapping("{idUsuario}/atualizar-habilidades")
-    public String atualizarHabilidades(@PathVariable Long idUsuario, Model model, HabilidadeRequestDto dto) throws IdNaoEncontradoException{
+    public String atualizarHabilidades(@PathVariable Long idUsuario, Model model, HabilidadeRequestDto dto,
+                                       RedirectAttributes redirectAttributes) throws IdNaoEncontradoException{
         usuarioService.atualizarHabilidades(idUsuario,dto);
         Usuario usuario = usuarioService.visualizarDadosUsuarioEspecifico(idUsuario);
         model.addAttribute("usuario",usuario);
-
-        return "redirect:/usuario/{idUsuario}/editar";
+        redirectAttributes.addFlashAttribute("mensagemSucesso", "Habilidades atualizadas com sucesso!");
+        return "redirect:/recomendacao/listar";
     }
 }

@@ -7,8 +7,12 @@ server:
 
 spring:
   ai:
-    openai:
-      api-key: suaapikey
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: deepseek-r1:latest
+          temperature: 0.7
   application:
     name: CareerUp
   datasource:
@@ -17,10 +21,10 @@ spring:
     username: ${DBUSER}
     driver-class-name: ${DBDRIVER:oracle.jdbc.driver.OracleDriver}
   mail:
-    host: smtp.gmail.com
+    host: ${MAILHOST:smtp.gmail.com}
     port: 587
-    username:
-    password:
+    username: ${MAILUSER}
+    password: ${MAILPASSWORD}
     properties:
       mail:
         smtp:
@@ -28,8 +32,8 @@ spring:
           starttls:
             enable: true
   rabbitmq:
-    addresses: amqps://
-    queue:
+    addresses: ${RABBITADRESS:amqps://}
+    queue: ${RABBITQUEUE:}
   jpa:
 
     hibernate:

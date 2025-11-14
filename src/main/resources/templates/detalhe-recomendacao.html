@@ -39,7 +39,7 @@
 
         <div class="field">
             <label>Resultado da IA:</label>
-            <p th:text="${recomendacao.resultadoIa}"></p>
+            <p th:utext="${recomendacao.resultadoIa}"></p>
         </div>
 
         <div class="field">
@@ -49,8 +49,17 @@
 
         <div class="actions">
             <a th:href="@{/recomendacao/listar}" class="btn-primary">Voltar</a>
+            <form th:action="@{'/recomendacao/' + ${recomendacao.idRecomendacao} + '/excluir'}"
+                  method="post"
+                  onsubmit="return confirm('Confirmar exclusão?');"
+                  style="display:inline;">
+                <button type="submit" class="btn-danger">Excluir</button>
+            </form>
         </div>
     </div>
+
+
+
 </main>
 
 <div th:replace="fragments/footer :: footerFragment"></div>

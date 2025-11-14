@@ -58,8 +58,7 @@ public class SecurityConfig {
                         .requestMatchers("/usuario/cadastro").hasAnyRole("USUARIO","GERENTE")
                         .requestMatchers("/usuario/listar").hasRole("GERENTE")
                         .requestMatchers("/usuario/alterar-cargo").hasRole("GERENTE")
-                        .requestMatchers("/dashboard-gerente/**").hasRole("GERENTE")
-
+                        .requestMatchers("/email/feedbacks").hasRole("GERENTE")
                         .anyRequest().authenticated()
                 )
                 .build();

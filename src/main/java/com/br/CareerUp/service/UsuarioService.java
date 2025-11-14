@@ -9,6 +9,8 @@ import com.br.CareerUp.model.Usuario;
 import com.br.CareerUp.repository.HabilidadeRepository;
 import com.br.CareerUp.repository.LoginRepository;
 import com.br.CareerUp.repository.UsuarioRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,13 +73,13 @@ public class UsuarioService {
     public Usuario atualizarHabilidades(Long idUsuario, HabilidadeRequestDto habilidadeRequestDto) throws IdNaoEncontradoException {
         Usuario usuario = usuarioRepository.findById(idUsuario)
                 .orElseThrow(() -> new IdNaoEncontradoException("Usuário não encontrado com o id: " + idUsuario));
-        Habilidade habilidade = new Habilidade();
+
+        Habilidade habilidade = usuario.getHabilidades();
 
         habilidade.setHabilidadePrimaria(habilidadeRequestDto.getHabilidadePrimaria());
         habilidade.setHabilidadeSecundaria(habilidadeRequestDto.getHabilidadeSecundaria());
         habilidade.setHabilidadeTerciaria(habilidadeRequestDto.getHabilidadeTerciaria());
 
-        usuario.setHabilidades(habilidade);
         return usuario;
     }
 
@@ -96,8 +98,8 @@ public class UsuarioService {
         usuarioRepository.delete(usuario);
     }
 
-    public List<Usuario> listarUsuarios(){
-        return usuarioRepository.findAll();
+    public Page<Usuario> listarUsuarios(Pageable pageable) {
+        return usuarioRepository.findAll(pageable);
     }
 
     public Usuario visualizarDadosUsuarioEspecifico(Long idUsuario) throws IdNaoEncontradoException{

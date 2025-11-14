@@ -7,6 +7,10 @@ import com.br.CareerUp.service.RecomendacaoService;
 import com.br.CareerUp.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,14 +28,27 @@ public class RecomendacaoController {
     private UsuarioService usuarioService;
 
     @GetMapping("/listar")
-    public String listar(Model model, Authentication authentication){
+    public String listar(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            Model model,
+            Authentication authentication) {
+
         String login = authentication.getName();
-        List<Recomendacao> recomendacoes = recomendacaoService.listarRecomendacoes(login);
-        model.addAttribute("recomendacao",recomendacoes);
+        Pageable pageable = PageRequest.of(page, size, Sort.by("idRecomendacao").descending());
+
+        Page<Recomendacao> recomendacoesPage = recomendacaoService.listarRecomendacoesPaginadas(login, pageable);
+
+        model.addAttribute("recomendacoesPage", recomendacoesPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", recomendacoesPage.getTotalPages());
+
         Usuario usuario = usuarioService.buscarPorLogin(login);
         model.addAttribute("usuario", usuario);
-     return "recomendacoes";
+
+        return "recomendacoes";
     }
+
     @PostMapping("/{idUsuario}/gerar")
     public String gerarRecomendacao(@PathVariable Long idUsuario, Model model) {
         try {

@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
 </head>
@@ -6,13 +6,17 @@
 <div th:fragment="headerFragment">
     <header class="header-container">
 
-        <img th:src="@{/images/CareerUp-Logo.png}" alt="CareerUp5 logo">
-        <a th:href="@{/recomendacao/listar}" class="btn-primary">função principal</a>
-        <a th:href="@{/usuario/listar}" class="btn-secondary">Gerenciar usuários</a>
-        <a th:href="@{/email/cadastrar-feedback}" class="btn-primary">Enviar um feedback</a>
-        <a th:href="@{/email/feedbacks}" class="btn-secondary">Ver feedbacks</a>
-
-        <a th:href="@{/logout}" class="btn-danger">Logout</a>
+            <img th:src="@{/images/CareerUp-Logo.png}" alt="CareerUp5 logo">
+            <a th:href="@{/recomendacao/listar}" class="btn-primary">função principal</a>
+            <a th:href="@{/email/cadastrar-feedback}" class="btn-primary">Enviar um feedback</a>
+        <a th:href="@{'/usuario/' + ${usuarioLogado.idUsuario} + '/editar'}" class="btn-header">
+            Alterar Habilidades
+        </a>
+        <div sec:authorize="hasRole('GERENTE')">
+            <a th:href="@{/usuario/listar}" class="btn-secondary">Gerenciar usuários</a>
+            <a th:href="@{/email/feedbacks}" class="btn-secondary">Ver feedbacks</a>
+        </div>
+            <a th:href="@{/logout}" class="btn-danger">Logout</a>
 
     </header>
 </div>

@@ -23,5 +23,30 @@
         <li><strong>Conta Usuário:</strong> carlos.silva | <strong>Senha:</strong> carlos123</li>
     </ul>
 </section>
+<div class="modal" id="errorModal" th:if="${param.error}">
+    <div class="modal-content">
+        <h2 style="color: var(--danger);">Erro</h2>
+        <p>Login ou senha incorretos.</p>
+        <button class="btn-primary" onclick="fechar('errorModal')">X</button>
+
+    </div>
+</div>
+<div th:if="${cadastroSucesso}">
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>✅ Cadastro realizado com sucesso!</h2>
+            <p>Agora você já pode fazer login na plataforma.</p>
+            <button onclick="fechar('modal')">X</button>
+        </div>
+    </div>
+</div>
+
 </body>
-  
+
+<script>
+        function fechar(id) {
+        const el = document.getElementById(id);
+        if (el) el.style.display = "none";
+    }
+</script>
+</script>

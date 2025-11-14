@@ -9,29 +9,34 @@
 
 <div th:replace="fragments/header :: headerFragment"></div>
 
-<main class="container">
+<main class="funcBody">
     <h1>Enviar Feedback</h1>
+    <div class="card">
 
-    <form th:action="@{/email/enviar-email}" th:object="${email}" method="post" class="form">
+        <form th:action="@{/email/enviar-email}" th:object="${email}" method="post" class="form"  onsubmit="mostrarLoading()">
 
-        <div class="field">
-            <label for="emailTo">Para:</label>
-            <input type="text" id="emailTo" th:field="*{emailTo}" required />
-        </div>
+            <div class="field">
+                <label for="emailTo">Para:</label>
+                <input type="text" id="emailTo" th:field="*{emailTo}" required />
+            </div>
 
-        <div class="field">
-            <label for="subject">Assunto:</label>
-            <input type="text" id="subject" th:field="*{subject}" required />
-        </div>
+            <div class="field">
+                <label for="subject">Assunto:</label>
+                <input type="text" id="subject" th:field="*{subject}" required />
+            </div>
 
-        <div class="field">
-            <label for="text">Mensagem:</label>
-            <textarea id="text" th:field="*{text}" rows="5" required></textarea>
-        </div>
+            <div class="field">
+                <label for="text">Mensagem:</label>
+                <textarea id="text" th:field="*{text}" rows="5" required></textarea>
+            </div>
 
-        <button type="submit" class="btn-primary">Enviar</button>
-    </form>
-
+            <button type="submit" class="btn-primary">Enviar</button>
+        </form>
+    </div>
+    <div id="loadingOverlay">
+        <div class="spinner"></div>
+        <p class="loading-text">Enviando e-mail...</p>
+    </div>
 
     <div th:if="${mensagemSucesso}">
         <div id="modal" class="modal">
@@ -49,4 +54,9 @@
 
 <div th:replace="fragments/footer :: footerFragment"></div>
 </body>
+<script>
+    function mostrarLoading() {
+        document.getElementById("loadingOverlay").style.display = "flex";
+    }
+</script>
 </html>

@@ -21,9 +21,6 @@ public class ContentController {
         model.addAttribute("usuario", usuario);
         return "cadastro";
     }
-    @GetMapping("/index")
-    public String index(){
-        return "index";
-    }
+
 
 }

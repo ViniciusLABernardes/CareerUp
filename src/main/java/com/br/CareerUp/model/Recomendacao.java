@@ -18,7 +18,7 @@ public class Recomendacao {
     @Column(name = "id_recomendacao")
     private Long idRecomendacao;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
