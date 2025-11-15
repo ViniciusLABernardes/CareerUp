@@ -17,12 +17,17 @@ public class EmailModel implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private UUID emailId;
+
     private String ownerRef;
+    @Column(length = 100)
     private String emailFrom;
+    @Column(length = 100)
     private String emailTo;
+
     private String subject;
-    @Column(name = "TEXTO")
+    @Column(length = 4000)
     private String text;
     private LocalDateTime sendDateEmail;
+    @Column(length = 50)
     private StatusEmail statusEmail;
 }

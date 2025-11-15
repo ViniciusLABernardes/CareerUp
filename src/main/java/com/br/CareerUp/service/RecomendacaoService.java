@@ -37,6 +37,10 @@ public class RecomendacaoService {
                 .orElseThrow(() -> new RuntimeException("Recomendação não encontrada"));
     }
 
+    public String exportarRecomendacaoUsuario(Long idUsuario) {
+        return recomendacaoRepository.exporta_recomendacao_usuario(idUsuario);
+    }
+
     @Cacheable(value = "recomendacaoCache", key = "#idUsuario")
     public Recomendacao gerarRecomendacao(Long idUsuario) {
         Usuario usuario = usuarioRepository.findById(idUsuario)

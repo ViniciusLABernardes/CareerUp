@@ -33,7 +33,7 @@ public class Usuario {
     private String cargo;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false,length = 50)
     private PapelUsuario papel;
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)

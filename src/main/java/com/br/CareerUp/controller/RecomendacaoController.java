@@ -49,6 +49,31 @@ public class RecomendacaoController {
         return "recomendacoes";
     }
 
+    @GetMapping("/exportar")
+    public String mostrarPaginaExportar() {
+        return "exportar-recomendacao";
+
+    }
+
+    @PostMapping("/exportar")
+    public String exportarRecomendacao(
+            @RequestParam("idUsuario") Long idUsuario,
+            Model model) {
+
+        try {
+            String json = recomendacaoService.exportarRecomendacaoUsuario(idUsuario);
+
+            model.addAttribute("jsonResultado", json);
+            model.addAttribute("idUsuario", idUsuario);
+
+            return "exportar-recomendacao";
+
+        } catch (Exception e) {
+            model.addAttribute("erro", "Erro ao exportar recomendação: " + e.getMessage());
+            return "exportar-recomendacao";
+        }
+    }
+
     @PostMapping("/{idUsuario}/gerar")
     public String gerarRecomendacao(@PathVariable Long idUsuario, Model model) {
         try {

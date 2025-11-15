@@ -8,7 +8,12 @@
 <body>
 <div th:replace="fragments/header :: headerFragment"></div>
 
+
+
 <main class="funcBody">
+    <a th:href="@{/recomendacao/exportar}" class="btn-primary" style="align-content: center">
+    Exportar Recomendação de um usuário
+</a>
     <h1>Usuários</h1>
 
     <table class="table">
