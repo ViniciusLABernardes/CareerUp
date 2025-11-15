@@ -28,6 +28,7 @@ public class EmailModel implements Serializable {
     @Column(length = 4000)
     private String text;
     private LocalDateTime sendDateEmail;
+    @Enumerated(EnumType.STRING)
     @Column(length = 50)
     private StatusEmail statusEmail;
 }

@@ -44,9 +44,18 @@ public class EmailService {
         } catch (MailException e){
             emailModel.setStatusEmail(StatusEmail.ERRO);
             e.printStackTrace();
-        } finally {
-            return emailRepository.save(emailModel);
         }
+              emailRepository.inserir_email(
+                    emailModel.getOwnerRef(),
+                    emailModel.getEmailFrom(),
+                    emailModel.getEmailTo(),
+                    emailModel.getSubject(),
+                    emailModel.getText(),
+                    emailModel.getSendDateEmail(),
+                    emailModel.getStatusEmail().name()
+            );
+              return emailModel;
+
     }
     public Page<EmailModel> findAll(Pageable pageable) {
         return  emailRepository.findAll(pageable);

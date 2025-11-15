@@ -16,9 +16,9 @@ spring:
   application:
     name: CareerUp
   datasource:
-    password: ${DBPASSWORD}
+    password: ${DBPASSWORD:}
     url: ${DBURL:jdbc:oracle:thin:@//oracle.fiap.com.br:1521/ORCL}
-    username: ${DBUSER}
+    username: ${DBUSER:}
     driver-class-name: ${DBDRIVER:oracle.jdbc.driver.OracleDriver}
   mail:
     host: ${MAILHOST:smtp.gmail.com}

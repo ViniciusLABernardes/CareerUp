@@ -40,34 +40,34 @@ public class UsuarioService {
     }
 
     @Transactional
-    public Usuario salvarUsuario(UsuarioRequestDto usuarioRequestDto){
-        Usuario user = Usuario.builder()
-                .nomeUsuario(usuarioRequestDto.getNomeUsuario())
-                .cpf(usuarioRequestDto.getCpf())
-                .email(usuarioRequestDto.getEmail())
-                .cargo(usuarioRequestDto.getCargo())
-                .papel(usuarioRequestDto.getPapel())
-                .build();
+    public Usuario salvarUsuario(UsuarioRequestDto dto) {
 
-        usuarioRepository.save(user);
+        usuarioRepository.inserirUsuarioProcedure(
+                dto.getNomeUsuario(),
+                dto.getCpf(),
+                dto.getEmail(),
+                dto.getCargo(),
+                dto.getPapel().name()
+        );
 
-        LoginUsuario loginUsuario = new LoginUsuario();
-        loginUsuario.setUsuario(user);
-        loginUsuario.setLogin(usuarioRequestDto.getLoginUsuario().getLogin());
-        loginUsuario.setSenha(passwordEncoder.encode(usuarioRequestDto.getLoginUsuario().getSenha()));
+        Usuario user = usuarioRepository
+                .findByCpf(dto.getCpf())
+                .orElseThrow(() -> new RuntimeException("Erro ao recuperar usuário inserido"));
 
-        loginRepository.save(loginUsuario);
+        loginRepository.inserirLoginProcedure(
+                user.getIdUsuario(),
+                dto.getLoginUsuario().getLogin(),
+                passwordEncoder.encode(dto.getLoginUsuario().getSenha())
+        );
 
-        Habilidade habilidade = new Habilidade();
-        habilidade.setUsuario(user);
-        habilidade.setHabilidadePrimaria(usuarioRequestDto.getHabilidades().getHabilidadePrimaria());
-        habilidade.setHabilidadeSecundaria(usuarioRequestDto.getHabilidades().getHabilidadeSecundaria());
-        habilidade.setHabilidadeTerciaria(usuarioRequestDto.getHabilidades().getHabilidadeTerciaria());
-
-        habilidadeRepository.save(habilidade);
+        habilidadeRepository.inserirHabilidadesProcedure(
+                user.getIdUsuario(),
+                dto.getHabilidades().getHabilidadePrimaria(),
+                dto.getHabilidades().getHabilidadeSecundaria(),
+                dto.getHabilidades().getHabilidadeTerciaria()
+        );
 
         return user;
-
     }
 
     @Transactional
