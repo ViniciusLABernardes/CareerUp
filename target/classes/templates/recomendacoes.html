@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Recomendações</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div th:replace="fragments/header :: headerFragment"></div>
+
+<main class="funcBody">
+
+
+    <form th:action="@{'/recomendacao/' + ${usuario.idUsuario} + '/gerar'}" method="post" style="display:inline;" onsubmit="mostrarLoading()">
+        <button type="submit" class="btn-primary">Gerar Nova Recomendação</button>
+    </form>
+
+    <h1>Histórico de Recomendações</h1>
+
+    <div class="card-container">
+        <div th:each="rec : ${recomendacoesPage}"
+             class="card-recomendacao"
+             th:attr="onclick=|window.location.href='@{/recomendacao/detalhe/{id}(id=${rec.idRecomendacao})}'|"
+             style="cursor:pointer;">
+
+            <h3 th:text="'Recomendação #' + ${rec.idRecomendacao}"></h3>
+            <p><strong>Gerado em:</strong>
+                <span th:text="${#temporals.format(rec.dataGeracao, 'dd/MM/yyyy HH:mm')}"></span>
+            </p>
+
+            <p th:text="${#strings.abbreviate(rec.resultadoIa, 100)}"></p>
+
+        </div>
+    </div>
+
+    <div class="pagination">
+        <a th:if="${currentPage > 0}"
+           th:href="@{/recomendacao/listar(page=${currentPage - 1}, size=5)}">⬅ Anterior</a>
+
+        <span>Página <span th:text="${currentPage + 1}"></span> de <span th:text="${totalPages}"></span></span>
+
+        <a th:if="${currentPage + 1 < totalPages}"
+           th:href="@{/recomendacao/listar(page=${currentPage + 1}, size=5)}">Próxima ➡</a>
+    </div>
+
+    <div th:if="${mensagemSucesso}">
+        <div id="sucessoModal" class="modal">
+            <div class="modal-content">
+                <h2>✅ Sucesso!</h2>
+                <p th:text="${mensagemSucesso}"></p>
+                <button class="btn-primary" onclick="fecharModal()">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingOverlay">
+        <div class="spinner"></div>
+        <p class="loading-text">Gerando recomendação(Pode levar um tempinho, aproveite para se alongar um pouco :) )...</p>
+    </div>
+</main>
+
+<div th:replace="fragments/footer :: footerFragment"></div>
+
+<script th:if="${mensagemSucesso}">
+    document.getElementById("sucessoModal").style.display = "flex";
+    function fecharModal() {
+        document.getElementById("sucessoModal").style.display = "none";
+    }
+</script>
+<script>
+    function mostrarLoading() {
+        document.getElementById("loadingOverlay").style.display = "flex";
+    }
+</script>
+</body>
+</html>

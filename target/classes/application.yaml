@@ -1,0 +1,45 @@
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+  port: 8080
+
+spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: deepseek-r1:latest
+          temperature: 0.7
+  application:
+    name: CareerUp
+  datasource:
+    password: ${DBPASSWORD:rita2362}
+    url: ${DBURL:jdbc:oracle:thin:@//oracle.fiap.com.br:1521/ORCL}
+    username: ${DBUSER:RM554728}
+    driver-class-name: ${DBDRIVER:oracle.jdbc.driver.OracleDriver}
+  mail:
+    host: ${MAILHOST:smtp.gmail.com}
+    port: 587
+    username: ${MAILUSER:careerupfiap@gmail.com}
+    password: ${MAILPASSWORD:krtg bmpi hfnw csle}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  rabbitmq:
+    addresses: ${RABBITADRESS:amqps://mfcekmeu:9mNiiN-oriBNNjDJJDSi7bMzn8PGe_te@toad.rmq.cloudamqp.com/mfcekmeu}
+    queue: ${RABBITQUEUE:careerupms.email}
+  jpa:
+
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: ${DBDIALECT:org.hibernate.dialect.OracleDialect}
+        format_sql: true
+    show-sql: true

@@ -23,8 +23,8 @@ spring:
   mail:
     host: ${MAILHOST:smtp.gmail.com}
     port: 587
-    username: ${MAILUSER}
-    password: ${MAILPASSWORD}
+    username: ${MAILUSER:}
+    password: ${MAILPASSWORD:}
     properties:
       mail:
         smtp:
@@ -32,7 +32,7 @@ spring:
           starttls:
             enable: true
   rabbitmq:
-    addresses: ${RABBITADRESS:amqps://}
+    addresses: ${RABBITADRESS:}
     queue: ${RABBITQUEUE:}
   jpa:
 

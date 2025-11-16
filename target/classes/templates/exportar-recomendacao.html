@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Exportar Recomendação</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: headerFragment"></div>
+
+<div class="funcBody">
+
+    <h1 style="margin-bottom: 1rem;">Exportar Recomendação mais recente</h1>
+
+    <div th:if="${mensagemSucesso}" class="info"
+         th:text="${mensagemSucesso}"></div>
+
+
+    <div th:if="${mensagemErro}" class="error"
+         th:text="${mensagemErro}"
+         style="font-size: 1rem; margin-bottom: 1rem;"></div>
+
+
+    <form th:action="@{/recomendacao/exportar}" method="post" class="form" style="width: 320px;">
+
+        <div class="field">
+            <label>ID do Usuário</label>
+            <input type="number" name="idUsuario" placeholder="Digite o ID" required>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">
+            Exportar
+        </button>
+    </form>
+
+
+
+    <div th:if="${jsonResultado}">
+        <h3>Resultado (JSON):</h3>
+        <pre class="card" style="background-color: #1e1e1e; color: #f0f1ee; white-space: pre-wrap;"
+             th:text="${jsonResultado}"></pre>
+        <button id="downloadJsonBtn" class="login-button">Baixar JSON</button>
+    </div>
+
+</div>
+
+
+<div th:replace="fragments/footer :: footerFragment"></div>
+
+<script th:if="${jsonResultado}" th:inline="javascript">
+document.getElementById('downloadJsonBtn').addEventListener('click', function() {
+const jsonStr = /*[[${jsonResultado}]]*/ '[]';
+const blob = new Blob([jsonStr], { type: 'application/json' });
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+a.download = 'resultado.json';
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+});
+</script>
+</body>
+</html>

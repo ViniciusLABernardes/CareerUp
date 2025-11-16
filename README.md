@@ -25,7 +25,7 @@ A plataforma centraliza **cadastro de usuários**, **gestão de habilidades**, *
    - 3º Abra o prompt de comando e digite: ollama run deepseek-r1:latest
    - 4º Após a instalação do deepseek e com o ollama rodando você ira ver em qual porta ele está(provavelmente 11434)
    - 5º Clone o projeto, dentro de applications.yaml coloque suas credenciais(banco de dados, gmail e endereço do rabbitmq e queue)
-   - 6º Caso você clique em rodar o projeto no intellij e de um erro como: TypeError: attempted to access missing method … RODE esses comandos abaixo no terminal do projeto:
+   - 6º Caso você clique em rodar o projeto no intellij e de um erro como: TypeError: attempted to access missing method … ou TYPETAG :: UNKNOWN RODE esses comandos abaixo no terminal do projeto:
    -   - $env:JAVA_HOME="C:\Program Files\Java\jdk-21"(ou onde o jdk esteja instalado em sua maquina)
        - $env:PATH="$env:JAVA_HOME\bin;$env:PATH"
    - 7º Após isso é so rodar o projeto e testar as funções(caso rode com seu database é necessario cadastrar primeiro um usuário/ caso acesse pelo deploy pode usar umas das contas deixadas abaixo do botão de login)
