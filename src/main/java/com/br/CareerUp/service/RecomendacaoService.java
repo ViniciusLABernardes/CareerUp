@@ -129,12 +129,17 @@ A resposta deve ser somente texto puro (sem Markdown).
         System.out.println("prompt: " + respostaIa);
         System.out.println(">>> Resposta recebida da IA");
 
+
+        recomendacaoRepository.inserirRecomendacaoProcedure(
+                usuario.getIdUsuario(),
+                LocalDateTime.now(),
+                respostaIa
+        );
+
         Recomendacao rec = new Recomendacao();
         rec.setUsuario(usuario);
         rec.setResultadoIa(respostaIa);
         rec.setDataGeracao(LocalDateTime.now());
-
-        recomendacaoRepository.save(rec);
 
         return rec;
     }
