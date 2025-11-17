@@ -39,7 +39,7 @@ public class UsuarioService {
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
 
-    @Transactional
+
     public Usuario salvarUsuario(UsuarioRequestDto dto) {
 
         usuarioRepository.inserirUsuarioProcedure(
@@ -50,9 +50,12 @@ public class UsuarioService {
                 dto.getPapel().name()
         );
 
+
+
         Usuario user = usuarioRepository
                 .findByCpf(dto.getCpf())
                 .orElseThrow(() -> new RuntimeException("Erro ao recuperar usuário inserido"));
+
 
         loginRepository.inserirLoginProcedure(
                 user.getIdUsuario(),
