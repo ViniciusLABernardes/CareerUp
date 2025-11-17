@@ -17,7 +17,7 @@ O **CareerUp** é uma aplicação Java desenvolvida com foco em auxiliar usuári
 A plataforma centraliza **cadastro de usuários**, **gestão de habilidades**, **avaliação de perfil profissional** e **geração automática de recomendações personalizadas** baseadas no cargo e competências informadas.
 
 ---
-# ** Link do deploy(render) **: https://careerup-nolm.onrender.com
+# ** Link do deploy(render) **: https://careerup-nolm.onrender.com (função da ia não está funcionando por conta de não ter uma api de ia gratuita, fazendo com que tenhamos que usar o ollama que roda localmente)
 # **Etapas para rodar o projeto **
 
    - 1º Baixe o ollama em seu computador: https://ollama.com/download/windows
