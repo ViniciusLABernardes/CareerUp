@@ -10,11 +10,14 @@
 
 
 
-<main class="funcBody">
-    <a th:href="@{/recomendacao/exportar}" class="btn-primary" style="align-content: center">
-    Exportar Recomendação de um usuário
-</a>
-    <h1>Usuários</h1>
+<main class="page-container">
+    <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
+        <h1 class="title-main">Usuários</h1>
+        <a th:href="@{/recomendacao/exportar}" class="button-secondary link-button">
+            Exportar Recomendação de um usuário
+        </a>
+    </div>
+
 
     <table class="table">
         <thead>
@@ -44,10 +47,10 @@
             <td th:text="${usuario.habilidades.habilidadeTerciaria}"></td>
 
             <td class="actions-cell">
-                <a th:href="@{'/usuario/' + ${usuario.idUsuario} + '/editar'}" class="btn-outline">Editar</a>
+                <a th:href="@{'/usuario/' + ${usuario.idUsuario} + '/editar'}" class="button-secondary link-button">Editar</a>
                 <form th:action="@{'/usuario/' + ${usuario.idUsuario} + '/excluir'}" method="post"
                       onsubmit="return confirm('Confirmar exclusão?');" style="display:inline;">
-                    <button type="submit" class="btn-danger">Excluir</button>
+                    <button type="submit" class="button-secondary" style="width: fit-content">Excluir</button>
                 </form>
             </td>
         </tr>

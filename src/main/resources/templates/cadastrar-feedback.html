@@ -9,30 +9,17 @@
 
 <div th:replace="fragments/header :: headerFragment"></div>
 
-<main class="funcBody">
-    <h1>Enviar Feedback</h1>
-    <div class="card">
+<main class="page-container">
+    <h1 class="title-main">Enviar Feedback</h1>
 
-        <form th:action="@{/email/enviar-email}" th:object="${email}" method="post" class="form"  onsubmit="mostrarLoading()">
+    <form th:action="@{/email/enviar-email}" th:object="${email}" method="post" class="form"  onsubmit="mostrarLoading()">
+        <input type="text" id="emailTo" th:field="*{emailTo}" placeholder="Destinatário" required />
+        <input type="text" id="subject" th:field="*{subject}" placeholder="Assunto" required />
+        <textarea placeholder="Digite aqui a mensagem"  th:field="*{text}" rows="5" required></textarea>
 
-            <div class="field">
-                <label for="emailTo">Para:</label>
-                <input type="text" id="emailTo" th:field="*{emailTo}" required />
-            </div>
+        <button type="submit" class="button-primary">Enviar</button>
+    </form>
 
-            <div class="field">
-                <label for="subject">Assunto:</label>
-                <input type="text" id="subject" th:field="*{subject}" required />
-            </div>
-
-            <div class="field">
-                <label for="text">Mensagem:</label>
-                <textarea id="text" th:field="*{text}" rows="5" required></textarea>
-            </div>
-
-            <button type="submit" class="btn-primary">Enviar</button>
-        </form>
-    </div>
     <div id="loadingOverlay">
         <div class="spinner"></div>
         <p class="loading-text">Enviando e-mail...</p>
@@ -41,8 +28,8 @@
     <div th:if="${mensagemSucesso}">
         <div id="modal" class="modal">
             <div class="modal-content">
-                <h2>✅ <span th:text="${mensagemSucesso}"></span></h2>
-                <p>Você será redirecionado em alguns segundos...</p>
+                <h2 class="title-secondary">✅ <span th:text="${mensagemSucesso}"></span></h2>
+                <p class="text">Você será redirecionado em alguns segundos...</p>
             </div>
         </div>
         <script>

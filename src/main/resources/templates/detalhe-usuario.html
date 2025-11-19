@@ -9,58 +9,54 @@
 
 <div th:replace="fragments/header :: headerFragment"></div>
 
-<main class="funcBody">
+<main class="page-container">
 
-    <div class="card" style="width: 40vw; padding: 2em;">
-        <h1 style="text-align:center; color: var(--primary); margin-bottom: 1em;">Alterar Cargo</h1>
+    <h1 class="title-main">Alterar Cargo</h1>
+    <form th:action="@{'/usuario/' + ${usuario.idUsuario} + '/alterar-cargo'}"
+          method="post"
+          th:object="${usuario}" class="form">
+        <input type="hidden" name="_method" value="patch"/>
 
-        <form th:action="@{'/usuario/' + ${usuario.idUsuario} + '/alterar-cargo'}"
-              method="post"
-              th:object="${usuario}" class="form">
-            <input type="hidden" name="_method" value="patch"/>
+        <div class="field">
+            <label>ID:</label>
+            <input type="text" th:value="${usuario.idUsuario}" readonly />
+        </div>
 
-            <div class="field">
-                <label>ID:</label>
-                <input type="text" th:value="${usuario.idUsuario}" readonly />
-            </div>
+        <div class="field">
+            <label>Nome:</label>
+            <input type="text" th:value="${usuario.nomeUsuario}" readonly />
+        </div>
 
-            <div class="field">
-                <label>Nome:</label>
-                <input type="text" th:value="${usuario.nomeUsuario}" readonly />
-            </div>
+        <div class="field">
+            <label>CPF:</label>
+            <input type="text" th:value="${usuario.cpf}" readonly />
+        </div>
 
-            <div class="field">
-                <label>CPF:</label>
-                <input type="text" th:value="${usuario.cpf}" readonly />
-            </div>
+        <div class="field">
+            <label>Papel:</label>
+            <input type="text" th:value="${usuario.papel}" readonly />
+        </div>
 
-            <div class="field">
-                <label>Papel:</label>
-                <input type="text" th:value="${usuario.papel}" readonly />
-            </div>
+        <div class="field">
+            <label>Login:</label>
+            <input type="text" th:value="${usuario.loginUsuario.login}" readonly />
+        </div>
 
-            <div class="field">
-                <label>Login:</label>
-                <input type="text" th:value="${usuario.loginUsuario.login}" readonly />
-            </div>
+        <div class="field">
+            <label>Habilidade Primária:</label>
+            <input type="text" th:value="${usuario.habilidades.habilidadePrimaria}" readonly />
+        </div>
 
-            <div class="field">
-                <label>Habilidade Primária:</label>
-                <input type="text" th:value="${usuario.habilidades.habilidadePrimaria}" readonly />
-            </div>
+        <div class="field">
+            <label>Novo Cargo:</label>
+            <input type="text" name="novoCargo" placeholder="Digite o novo cargo" required />
+        </div>
 
-            <div class="field">
-                <label>Novo Cargo:</label>
-                <input type="text" name="novoCargo" placeholder="Digite o novo cargo" required />
-            </div>
-
-            <div style="display:flex; justify-content:center; gap:10px; margin-top:1.5em;">
-                <button type="submit" class="btn-primary">Salvar</button>
-                <a th:href="@{/usuario/listar}" class="btn-secondary">Cancelar</a>
-            </div>
-        </form>
-    </div>
-
+        <div style="display:flex; justify-content:center; gap:10px; margin-top:1.5em; align-items: center">
+            <button type="submit" class="button-primary">Salvar</button>
+            <a th:href="@{/usuario/listar}" class="btn-secondary">Cancelar</a>
+        </div>
+    </form>
 </main>
 
 <div th:replace="fragments/footer :: footerFragment"></div>

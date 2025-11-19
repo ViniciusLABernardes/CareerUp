@@ -8,14 +8,14 @@
 <body>
 <div th:replace="fragments/header :: headerFragment"></div>
 
-<main class="funcBody">
+<main class="page-container">
 
-
-    <form th:action="@{'/recomendacao/' + ${usuario.idUsuario} + '/gerar'}" method="post" style="display:inline;" onsubmit="mostrarLoading()">
-        <button type="submit" class="btn-primary">Gerar Nova Recomendação</button>
-    </form>
-
-    <h1>Histórico de Recomendações</h1>
+    <div style="display: flex; width: 100%; justify-content: space-between">
+        <h1 class="title-main">Histórico de Recomendações</h1>
+        <form th:action="@{'/recomendacao/' + ${usuario.idUsuario} + '/gerar'}" method="post" style="display:inline;" onsubmit="mostrarLoading()">
+            <button type="submit" class="button-secondary">Gerar Nova Recomendação</button>
+        </form>
+    </div>
 
     <div class="card-container">
         <div th:each="rec : ${recomendacoesPage}"
@@ -23,9 +23,9 @@
              th:attr="onclick=|window.location.href='@{/recomendacao/detalhe/{id}(id=${rec.idRecomendacao})}'|"
              style="cursor:pointer;">
 
-            <h3 th:text="'Recomendação #' + ${rec.idRecomendacao}"></h3>
-            <p><strong>Gerado em:</strong>
-                <span th:text="${#temporals.format(rec.dataGeracao, 'dd/MM/yyyy HH:mm')}"></span>
+            <h3 class="title-secondary" th:text="'Recomendação #' + ${rec.idRecomendacao}"></h3>
+            <p ><strong>Gerado em:</strong>
+                <span class="text" th:text="${#temporals.format(rec.dataGeracao, 'dd/MM/yyyy HH:mm')}"></span>
             </p>
 
             <p th:text="${#strings.abbreviate(rec.resultadoIa, 100)}"></p>
@@ -46,9 +46,9 @@
     <div th:if="${mensagemSucesso}">
         <div id="sucessoModal" class="modal">
             <div class="modal-content">
-                <h2>✅ Sucesso!</h2>
-                <p th:text="${mensagemSucesso}"></p>
-                <button class="btn-primary" onclick="fecharModal()">Fechar</button>
+                <h2 class="title-secondary">✅ Sucesso!</h2>
+                <p class="text" th:text="${mensagemSucesso}"></p>
+                <button class="button-secondary" onclick="fecharModal()">Fechar</button>
             </div>
         </div>
     </div>

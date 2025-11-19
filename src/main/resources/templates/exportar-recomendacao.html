@@ -10,9 +10,9 @@
 
 <div th:replace="fragments/header :: headerFragment"></div>
 
-<div class="funcBody">
+<div class="page-container">
 
-    <h1 style="margin-bottom: 1rem;">Exportar Recomendação mais recente</h1>
+    <h1 class="title-main">Exportar Recomendação mais recente</h1>
 
     <div th:if="${mensagemSucesso}" class="info"
          th:text="${mensagemSucesso}"></div>
@@ -24,24 +24,20 @@
 
 
     <form th:action="@{/recomendacao/exportar}" method="post" class="form" style="width: 320px;">
+        <input type="number" name="idUsuario" placeholder="ID do usuário" required>
 
-        <div class="field">
-            <label>ID do Usuário</label>
-            <input type="number" name="idUsuario" placeholder="Digite o ID" required>
-        </div>
-
-        <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">
+        <button type="submit" class="button-primary" style="margin-top: 10px;">
             Exportar
         </button>
     </form>
 
 
 
-    <div th:if="${jsonResultado}">
-        <h3>Resultado (JSON):</h3>
-        <pre id="jsonPre" class="card" style="background-color: #1e1e1e; color: #f0f1ee; white-space: pre-wrap;"
+    <div th:if="${jsonResultado}" style="display: flex; flex-direction: column; gap: 8px; margin-top: 32px;">
+        <h3 class="title-secondary">Resultado (JSON):</h3>
+        <pre id="jsonPre" class="card" style="background-color: #1A1A1F; color: #F4F4F5; white-space: pre-wrap; margin-top: 16px;"
              th:text="${jsonResultado}"></pre>
-        <button id="downloadJsonBtn" class="login-button">Baixar JSON</button>
+        <button id="downloadJsonBtn" class="button-secondary" style="align-items: center">Baixar JSON</button>
     </div>
 
 </div>

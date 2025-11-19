@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public interface EmailRepository extends JpaRepository<EmailModel, UUID> {
-    @Procedure(procedureName = "pkg_gerente.inserir_email")
+    @Procedure(procedureName = "pkg_usuario.inserir_email")
     void inserir_email(
             @Param("p_owner_ref") String ownerRef,
             @Param("p_email_from") String emailFrom,

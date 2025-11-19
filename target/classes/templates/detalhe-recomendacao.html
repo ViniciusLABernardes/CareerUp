@@ -10,7 +10,7 @@
 
 <div th:replace="fragments/header :: headerFragment"></div>
 
-<main class="funcBody">
+<main class="page-container">
 
     <div th:if="${mensagemSucesso}" class="alert success">
         <p th:text="${mensagemSucesso}"></p>
@@ -19,41 +19,45 @@
         <p th:text="${erro}"></p>
     </div>
 
-    <h1>Detalhes da Recomendação</h1>
+    <h1 class="title-maint">Detalhes da Recomendação</h1>
 
-    <div class="card">
-        <div class="field">
-            <label>Usuário:</label>
-            <span th:text="${recomendacao.usuario.nomeUsuario}"></span>
+    <div class="card" style="margin-top: 32px;">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+            <div class="field">
+                <label class="text">Usuário:</label>
+                <span th:text="${recomendacao.usuario.nomeUsuario}"></span>
+            </div>
+
+            <div class="field">
+                <label class="text">CPF:</label>
+                <span th:text="${recomendacao.usuario.cpf}"></span>
+            </div>
+
+            <div class="field">
+                <label class="text">Cargo:</label>
+                <span th:text="${recomendacao.usuario.cargo}"></span>
+            </div>
+            <div class="field">
+                <label class="text">Data de Geração:</label>
+                <span th:text="${#temporals.format(recomendacao.dataGeracao, 'dd/MM/yyyy HH:mm')}"></span>
+            </div>
         </div>
 
-        <div class="field">
-            <label>CPF:</label>
-            <span th:text="${recomendacao.usuario.cpf}"></span>
-        </div>
 
-        <div class="field">
-            <label>Cargo:</label>
-            <span th:text="${recomendacao.usuario.cargo}"></span>
-        </div>
-
-        <div class="field">
-            <label>Resultado da IA:</label>
+        <div class="field" style="margin-top: 12px;">
+            <label class="text">Resultado da IA:</label>
             <pre class="resultado-ia" th:utext="${recomendacao.resultadoIa}"></pre>
         </div>
 
-        <div class="field">
-            <label>Data de Geração:</label>
-            <span th:text="${#temporals.format(recomendacao.dataGeracao, 'dd/MM/yyyy HH:mm')}"></span>
-        </div>
 
-        <div class="actions">
-            <a th:href="@{/recomendacao/listar}" class="btn-primary">Voltar</a>
+
+        <div  >
             <form th:action="@{'/recomendacao/' + ${recomendacao.idRecomendacao} + '/excluir'}"
                   method="post"
                   onsubmit="return confirm('Confirmar exclusão?');"
-                  style="display:inline;">
-                <button type="submit" class="btn-danger">Excluir</button>
+                  style="width: 100%; display: flex; flex-direction:row;justify-content: center; align-items: center; gap: 8px; margin-top: 32px;">
+                <a th:href="@{/recomendacao/listar}" class="link-button button-secondary">Voltar</a>
+                <button type="submit" class="button-danger">Excluir</button>
             </form>
         </div>
     </div>

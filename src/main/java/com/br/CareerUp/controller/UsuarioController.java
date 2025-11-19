@@ -81,6 +81,14 @@ public class UsuarioController {
     public String editarUsuario(Model model,@PathVariable  Long idUsuario) throws IdNaoEncontradoException {
         Usuario usuario = usuarioService.visualizarDadosUsuarioEspecifico(idUsuario);
         model.addAttribute("usuario", usuario);
+        return "detalhe-usuario";
+
+    }
+
+    @GetMapping("{idUsuario}/alterar-habilidades")
+    public String alterarHabilidade(Model model,@PathVariable  Long idUsuario) throws IdNaoEncontradoException {
+        Usuario usuario = usuarioService.visualizarDadosUsuarioEspecifico(idUsuario);
+        model.addAttribute("usuario", usuario);
         return "alterar-habilidades";
 
     }

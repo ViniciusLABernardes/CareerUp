@@ -7,86 +7,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
+    <section class="auth-container">
+        <img th:src="@{/images/CareerUp-Logo.png}" alt="CareerUp logo" style="height: 96px; margin-bottom: 8px;">
+        <h1 class="title-main">CareerUp - Cadastro</h1>
+        <form th:action="@{/usuario/salvar}" th:object="${usuario}" method="post">
+            <input type="text" id="nomeUsuario" th:field="*{nomeUsuario}" maxlength="150" placeholder="Nome de usuário" required/>
+            <input type="text" id="cpf" th:field="*{cpf}" maxlength="20" placeholder="CPF" required/>
+            <input type="text" id="email" th:field="*{email}" maxlength="100" placeholder="Email" required/>
+            <input type="text" id="cargo" th:field="*{cargo}" maxlength="50" placeholder="Cargo" required/>
 
-
-
-<main class="funcBody">
-    <img th:src="@{/images/CareerUp-Logo.png}" alt="CareerUp logo" style="height: 14em;display: flex;align-items: center;">
-    <H1 class="" style="padding-bottom: 2em">CareerUp</H1>
-    <h1>Cadastrar Usuário</h1>
-
-    <div class="card" style="width: 450px;">
-
-        <form th:action="@{/usuario/salvar}" th:object="${usuario}" method="post" class="form">
-
-            <div class="field">
-                <label for="nomeUsuario">Nome</label>
-                <input type="text" id="nomeUsuario" th:field="*{nomeUsuario}" maxlength="150" required />
-            </div>
-
-            <div class="field">
-                <label for="cpf">CPF</label>
-                <input type="text" id="cpf" th:field="*{cpf}" maxlength="20" required />
-            </div>
-
-            <div class="field">
-                <label for="email">email</label>
-                <input type="text" id="email" th:field="*{email}" maxlength="100" required />
-            </div>
-
-            <div class="field">
-                <label for="cargo">Cargo</label>
-                <input type="text" id="cargo" th:field="*{cargo}" maxlength="50" required />
-            </div>
-
-            <p style="font-style: italic; color: gray;">
+            <select id="papel" th:field="*{papel}">
+                <option th:value="USUARIO">Usuário</option>
+                <option th:value="GERENTE">Gerente</option>
+            </select>
+            <p class="text" style="margin-top: 0; margin-bottom: 16px;">
                 *Este campo só está disponível por ser uma versão demo.
                 Em produção, apenas administradores podem cadastrar gerentes.
             </p>
 
-            <div class="field">
-                <label for="papel">Papel</label>
-                <select id="papel" th:field="*{papel}">
-                    <option th:value="USUARIO">Usuário</option>
-                    <option th:value="GERENTE">Gerente</option>
-                </select>
-            </div>
+            <input type="text" id="login" th:field="*{loginUsuario.login}" placeholder="Login" required/>
+            <input type="password" id="senha" th:field="*{loginUsuario.senha}" placeholder="Senha" required/>
 
-            <div class="field">
-                <label for="login">Login</label>
-                <input type="text" id="login" th:field="*{loginUsuario.login}" required />
-            </div>
+            <input type="text" id="habilidadePrimaria" th:field="*{habilidades.habilidadePrimaria}" placeholder="Habilidade primária" required/>
+            <input type="text" id="habilidadeSecundaria" th:field="*{habilidades.habilidadeSecundaria}" placeholder="Habilidade secundária"/>
+            <input type="text" id="habilidadeTerciaria" th:field="*{habilidades.habilidadeTerciaria}" placeholder="Habilidade terciária"/>
 
-            <div class="field">
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" th:field="*{loginUsuario.senha}" required />
-            </div>
-
-            <div class="field">
-                <label for="habilidadePrimaria">Habilidade Primária</label>
-                <input type="text" id="habilidadePrimaria" th:field="*{habilidades.habilidadePrimaria}" required />
-            </div>
-
-            <div class="field">
-                <label for="habilidadeSecundaria">Habilidade Secundária</label>
-                <input type="text" id="habilidadeSecundaria" th:field="*{habilidades.habilidadeSecundaria}" />
-            </div>
-
-            <div class="field">
-                <label for="habilidadeTerciaria">Habilidade Terciária</label>
-                <input type="text" id="habilidadeTerciaria" th:field="*{habilidades.habilidadeTerciaria}" />
-            </div>
-
-            <div class="actions">
-                <button type="submit" class="btn-primary">Cadastrar</button>
-            </div>
+            <button type="submit">Cadastrar</button>
         </form>
 
-    </div>
-    <p>Já tem uma conta ? <a th:href="@{/login}"><strong>Logar-se</strong></a></p>
+        <p class="text">Já tem uma conta ? <a th:href="@{/login}">Logar-se</a></p>
 
 
-</main>
+    </section>
 
 <div th:replace="fragments/footer :: footerFragment"></div>
 </body>

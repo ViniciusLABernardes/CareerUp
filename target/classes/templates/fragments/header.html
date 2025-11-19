@@ -3,20 +3,19 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<div th:fragment="headerFragment">
-    <header class="header-container">
-
-            <img th:src="@{/images/CareerUp-Logo.png}" alt="CareerUp5 logo">
-            <a th:href="@{/recomendacao/listar}" class="btn-primary">função principal</a>
-            <a th:href="@{/email/cadastrar-feedback}" class="btn-primary">Enviar um feedback</a>
-        <a th:href="@{'/usuario/' + ${usuarioLogado.idUsuario} + '/editar'}" class="btn-secondary">
-            Alterar Habilidades
-        </a>
-        <div sec:authorize="hasRole('GERENTE')">
-            <a th:href="@{/usuario/listar}" class="btn-secondary">Gerenciar usuários</a>
-            <a th:href="@{/email/feedbacks}" class="btn-secondary">Ver feedbacks</a>
-        </div>
-            <a th:href="@{/logout}" class="btn-danger">Logout</a>
+<div th:fragment="headerFragment" style="background-color: #1A1A1F;">
+    <header>
+        <img th:src="@{/images/CareerUp-Logo.png}" alt="CareerUp logo" style="width: 2.5rem">
+        <ul>
+            <li><a th:href="@{/recomendacao/listar}" class="btn-primary">Função Principal</a></li>
+            <li><a th:href="@{/email/cadastrar-feedback}" class="btn-primary">Enviar um feedback</a></li>
+            <li><a th:href="@{'/usuario/' + ${usuarioLogado.idUsuario} + '/alterar-habilidades'}" class="btn-secondary">
+                Alterar Habilidades
+            </a></li>
+            <li sec:authorize="hasRole('GERENTE')"><a th:href="@{/usuario/listar}" class="btn-secondary">Gerenciar usuários</a></li>
+            <li sec:authorize="hasRole('GERENTE')"><a th:href="@{/email/feedbacks}" class="btn-secondary">Ver feedbacks</a></li>
+        </ul>
+        <a th:href="@{/logout}" class="logout" >Logout</a>
 
     </header>
 </div>

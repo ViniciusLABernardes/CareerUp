@@ -1,45 +1,42 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns="http://www.w3.org/1999/html">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
 
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
-<body style="display:flex;flex-direction:column;align-items: center;">
-<img th:src="@{/images/CareerUp-Logo.png}" alt="CareerUp logo" style="height: 14em;display: flex;align-items: center;">
-<H1 class="">CareerUp</H1>
-<section class="login-section">
-    <form action="/login" method="post" class="login-form">
-        <input type="text" name="username" id="username" class="login-input" placeholder="Login" required />
-        <input type="password" name="password" id="password" class="login-input" placeholder="Senha" required />
-        <button type="submit" class="login-button">Login</button>
-    </form>
-    <p>Não tem uma conta ainda? <a th:href="@{/cadastro}"><strong>Cadastre-se</strong></a></p>
-    <h3>Dados mockados para teste:</h3>
-    <ul>
-        <li><strong>Conta Gerente:</strong> garibaldo.torres | <strong>Senha:</strong> armando123</li>
-        <li><strong>Conta Usuário:</strong> carlos.silva | <strong>Senha:</strong> carlos123</li>
-    </ul>
-</section>
-<div class="modal" id="errorModal" th:if="${param.error}">
-    <div class="modal-content">
-        <h2 style="color: var(--danger);">Erro</h2>
-        <p>Login ou senha incorretos.</p>
-        <button class="btn-primary" onclick="fechar('errorModal')">X</button>
+<body>
+    <section class="auth-container">
+        <img th:src="@{/images/CareerUp-Logo.png}" alt="CareerUp logo" style="height: 96px; margin-bottom: 8px;">
+        <h1 class="title-main">CareerUp</h1>
+        <form action="/login" method="post" >
+            <input type="text" name="username" id="username" placeholder="Login" required />
+            <input type="password" name="password" id="password" placeholder="Senha" required />
+            <button class="button-primary" type="submit">Login</button>
+        </form>
+        <span class="error" th:if="${param.error}">Login ou senha incorretos.</span>
+        <p class="text">Não tem uma conta ainda? <a th:href="@{/cadastro}">Cadastre-se</a></p>
+        <div class="card">
+            <h2 class="title-secondary">Dados mockados para teste:</h2>
+            <ul>
+                <li><span>Conta Gerente:</span> garibaldo.torres | <span>Senha:</span> armando123</li>
+                <li><span>Conta Usuário:</span> carlos.silva | <span>Senha:</span> carlos123</li>
+            </ul>
+        </div>
+    </section>
 
-    </div>
-</div>
-<div th:if="${cadastroSucesso}">
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h2>✅ Cadastro realizado com sucesso!</h2>
-            <p>Agora você já pode fazer login na plataforma.</p>
-            <button onclick="fechar('modal')">X</button>
+    <!-- Modal Sucesso -->
+    <div th:if="${cadastroSucesso}">
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h2 class="title-secondary">✅ Cadastro realizado com sucesso!</h2>
+                <p class="text">Agora você já pode fazer login na plataforma.</p>
+                <button class="button-secondary" onclick="fechar('modal')">Fechar</button>
+            </div>
         </div>
     </div>
-</div>
 
 </body>
 

@@ -9,66 +9,62 @@
 
 <div th:replace="fragments/header :: headerFragment"></div>
 
-<main class="funcBody">
+<main class="page-container">
+    <h1 class="title-main">Alterar Habilidades</h1>
+    <form th:action="@{'/usuario/' + ${usuario.idUsuario} + '/atualizar-habilidades'}"
+          method="post"
+          th:object="${usuario}" class="form">
 
-    <div class="card" style="width: 40vw; padding: 2em;">
-        <h1 style="text-align:center; color: var(--primary); margin-bottom: 1em;">Alterar Habilidades</h1>
+        <div class="field">
+            <label>ID:</label>
+            <input type="text" th:value="${usuario.idUsuario}" readonly />
+        </div>
 
-        <form th:action="@{'/usuario/' + ${usuario.idUsuario} + '/atualizar-habilidades'}"
-              method="post"
-              th:object="${usuario}" class="form">
+        <div class="field">
+            <label>Nome:</label>
+            <input type="text" th:value="${usuario.nomeUsuario}" readonly />
+        </div>
 
-            <div class="field">
-                <label>ID:</label>
-                <input type="text" th:value="${usuario.idUsuario}" readonly />
-            </div>
+        <div class="field">
+            <label>CPF:</label>
+            <input type="text" th:value="${usuario.cpf}" readonly />
+        </div>
 
-            <div class="field">
-                <label>Nome:</label>
-                <input type="text" th:value="${usuario.nomeUsuario}" readonly />
-            </div>
+        <div class="field">
+            <label>Papel:</label>
+            <input type="text" th:value="${usuario.papel}" readonly />
+        </div>
 
-            <div class="field">
-                <label>CPF:</label>
-                <input type="text" th:value="${usuario.cpf}" readonly />
-            </div>
+        <div class="field">
+            <label>Login:</label>
+            <input type="text" th:value="${usuario.loginUsuario.login}" readonly />
+        </div>
 
-            <div class="field">
-                <label>Papel:</label>
-                <input type="text" th:value="${usuario.papel}" readonly />
-            </div>
+        <hr style="margin: 1em 0;">
 
-            <div class="field">
-                <label>Login:</label>
-                <input type="text" th:value="${usuario.loginUsuario.login}" readonly />
-            </div>
+        <div class="field">
+            <label>Habilidade Primária:</label>
+            <input type="text" name="habilidadePrimaria"
+                   th:value="${usuario.habilidades.habilidadePrimaria}" placeholder="Digite a habilidade primária" required />
+        </div>
 
-            <hr style="margin: 1em 0;">
+        <div class="field">
+            <label>Habilidade Secundária:</label>
+            <input type="text" name="habilidadeSecundaria"
+                   th:value="${usuario.habilidades.habilidadeSecundaria}" placeholder="Digite a habilidade secundária" required />
+        </div>
 
-            <div class="field">
-                <label>Habilidade Primária:</label>
-                <input type="text" name="habilidadePrimaria"
-                       th:value="${usuario.habilidades.habilidadePrimaria}" placeholder="Digite a habilidade primária" required />
-            </div>
+        <div class="field">
+            <label>Habilidade Terciária:</label>
+            <input type="text" name="habilidadeTerciaria"
+                   th:value="${usuario.habilidades.habilidadeTerciaria}" placeholder="Digite a habilidade terciária" required />
+        </div>
 
-            <div class="field">
-                <label>Habilidade Secundária:</label>
-                <input type="text" name="habilidadeSecundaria"
-                       th:value="${usuario.habilidades.habilidadeSecundaria}" placeholder="Digite a habilidade secundária" required />
-            </div>
-
-            <div class="field">
-                <label>Habilidade Terciária:</label>
-                <input type="text" name="habilidadeTerciaria"
-                       th:value="${usuario.habilidades.habilidadeTerciaria}" placeholder="Digite a habilidade terciária" required />
-            </div>
-
-            <div style="display:flex; justify-content:center; gap:10px; margin-top:1.5em;">
-                <button type="submit" class="btn-primary">Salvar</button>
-                <a th:href="@{/usuario/listar}" class="btn-secondary">Cancelar</a>
-            </div>
-        </form>
-    </div>
+        <div style="display: flex; flex-direction: column; justify-content:center; gap:10px; margin-top:1.5em; align-items: center;">
+            <button type="submit" class="button-primary">Salvar</button>
+            <a th:href="@{/usuario/listar}" >Cancelar</a>
+        </div>
+    </form>
 
 </main>
 
