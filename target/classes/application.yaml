@@ -18,7 +18,7 @@ spring:
   datasource:
     password: ${DBPASSWORD:rita2362}
     url: ${DBURL:jdbc:oracle:thin:@//oracle.fiap.com.br:1521/ORCL}
-    username: ${DBUSER:rm554728}
+    username: ${DBUSER:RM554728}
     driver-class-name: ${DBDRIVER:oracle.jdbc.driver.OracleDriver}
   mail:
     host: ${MAILHOST:smtp.gmail.com}
